@@ -32,7 +32,7 @@ export class AddPeriphericToComputer {
     computer.peripherics.push(peripheric._id);
     peripheric.inUse = true;
 
-    await computer.save();
+    await this.computerPersistenceAdapter.update(computerId, computer);
     await peripheric.save();
   }
 }
