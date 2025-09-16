@@ -13,7 +13,7 @@ export class Computer {
   @Prop()
   fabricationDate: Date;
 
-  @Prop({ type: Types.ObjectId, ref: 'Peripheric', default: [] })
+  @Prop({ type: Types.ObjectId, ref: Peripheric.name, default: [] })
   peripherics: Types.ObjectId[];
 }
 
