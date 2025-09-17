@@ -1,3 +1,4 @@
+import { ComputerMapper } from '../controller/dto/computer.mapper';
 import { ComputerPersistenceAdapter } from '../persistence/computer.persistence.adapter';
 import { Injectable } from '@nestjs/common';
 
@@ -8,6 +9,10 @@ export class GetAllComputersUsecase {
   ) {}
 
   async execute() {
-    return await this.computerPersistenceAdapter.findAll();
+    const computers = await this.computerPersistenceAdapter.findAll();
+
+    const modelsOut =
+      ComputerMapper.computerDocumentArrayToComputerModelOutArray(computers);
+    return modelsOut;
   }
 }

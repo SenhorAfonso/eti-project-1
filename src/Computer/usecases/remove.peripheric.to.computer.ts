@@ -3,6 +3,7 @@ import { ComputerPersistenceAdapter } from '../persistence/computer.persistence.
 import { BadRequestException } from '@nestjs/common';
 import { ExceptionMessages } from 'src/Common/exceptions/exception.messages';
 import { Injectable } from '@nestjs/common';
+import { Types } from 'mongoose';
 
 @Injectable()
 export class RemovePeriphericToComputer {
@@ -25,9 +26,14 @@ export class RemovePeriphericToComputer {
       throw new BadRequestException(ExceptionMessages.COMPUTER.NOT_FOUND);
     }
 
-    computer.peripherics.filter(
-      (peripheric) => String(peripheric) !== periphericId,
-    );
+    const newPeriphericList: Types.ObjectId[] = [];
+    computer.peripherics.forEach((peripheric) => {
+      if (String(peripheric) !== periphericId) {
+        newPeriphericList.push(peripheric);
+      }
+    });
+
+    computer.peripherics = newPeriphericList;
     await computer.save();
   }
 }

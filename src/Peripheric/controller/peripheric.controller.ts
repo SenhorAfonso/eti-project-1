@@ -16,7 +16,7 @@ import { CreatePeriphericRequest } from './dto/create.peripheric.request';
 import { UpdatePeriphericRequest } from './dto/update.peripheric.request';
 import { PeriphericMapper } from './dto/peripheric.mapper';
 
-@Controller('peripheric')
+@Controller('peripherics')
 export class PeriphericController {
   constructor(
     private readonly createPeriphericUsecase: CreatePeriphericUsecase,

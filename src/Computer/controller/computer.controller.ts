@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  UseFilters,
 } from '@nestjs/common';
 import { CreateComputerUsecase } from '../usecases/create.computer.usecase';
 import { GetAllComputersUsecase } from '../usecases/get.all.computers.usecase';
@@ -17,8 +18,10 @@ import { ComputerMapper } from './dto/computer.mapper';
 import { UpdateComputerRequest } from './dto/update.computer.request';
 import { AddPeriphericToComputer } from '../usecases/add.peripheric.to.computer';
 import { RemovePeriphericToComputer } from '../usecases/remove.peripheric.to.computer';
+import { HttpExceptionFilter } from 'src/Common/exceptions/exception.filter';
 
-@Controller('computer')
+@Controller('computers')
+@UseFilters(HttpExceptionFilter)
 export class ComputerController {
   constructor(
     private readonly createComputerUsecase: CreateComputerUsecase,

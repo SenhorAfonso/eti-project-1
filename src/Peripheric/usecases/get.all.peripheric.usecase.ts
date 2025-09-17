@@ -1,3 +1,4 @@
+import { PeriphericModelOut } from '../domain/models/out/peripheric.model.out';
 import { PeriphericPersistenceAdapter } from '../persistence/peripheric.persistence.adapter';
 import { Injectable } from '@nestjs/common';
 
@@ -8,6 +9,10 @@ export class GetAllPeriphericsUsecase {
   ) {}
 
   async execute() {
-    return await this.periphericPersistenceAdapter.findAll();
+    const peripherics = await this.periphericPersistenceAdapter.findAll();
+
+    return peripherics.map((item) => {
+      return new PeriphericModelOut(String(item.id), item.name);
+    });
   }
 }
